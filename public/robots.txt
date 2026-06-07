@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://genealogy-site.pages.dev/sitemap-index.xml
+Sitemap: https://byrne-genealogy.pages.dev/sitemap-index.xml

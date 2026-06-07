@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://genealogy-site.pages.dev',
+  site: 'https://byrne-genealogy.pages.dev',
   integrations: [sitemap()],
 });
