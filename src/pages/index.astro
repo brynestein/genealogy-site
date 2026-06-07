@@ -4,31 +4,475 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import business from '../data/business.json';
 import seo from '../data/seo.json';
+
+const tiles = [
+  { label: 'People', count: '142 profiles', tint: 'sepia' },
+  { label: 'Places', count: '38 locations', tint: 'sage' },
+  { label: 'Stories', count: '27 articles', tint: 'rose' },
+];
+
+const recent = [
+  { name: 'Mary Catherine Byrne', dates: '1887 – 1962', note: 'Born in County Mayo; emigrated to Liverpool, 1909.' },
+  { name: 'Thomas J. Byrne', dates: '1854 – 1921', note: 'Carpenter; family records list eight children.' },
+  { name: 'Eliza Whelan', dates: '1901 – 1989', note: 'Maternal line; long-running correspondence preserved.' },
+];
+
+const features = [
+  { title: 'Members Directory', desc: 'Browse every documented relative across the tree.' },
+  { title: 'Family Timeline', desc: 'Births, marriages, migrations — set against the wider history.' },
+  { title: 'Relatives Discovery', desc: 'See how any two people in the tree are connected.' },
+  { title: 'Galleries', desc: 'Photographs, letters and scanned documents by decade.' },
+];
+
+const gallery = ['a','b','c','d','e','f'];
+
+const stories = [
+  { title: 'From Mayo to Merseyside: tracing the 1909 crossing', date: 'May 2026', read: '8 min read' },
+  { title: 'Reading a 19th-century parish register', date: 'April 2026', read: '5 min read' },
+  { title: 'Three generations of carpenters in one workshop', date: 'March 2026', read: '6 min read' },
+];
 ---
 
 <Layout title={seo.index.title} description={seo.index.description}>
   <Header />
+
   <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">A living family archive</p>
+        <h1>Family is everything.</h1>
+        <p class="lede">A continuing project to gather, verify and share the history of the Byrne family — names, places, photographs and the stories behind them.</p>
+        <div class="hero-cta">
+          <a href="#tree" class="btn btn-primary">Explore the family tree</a>
+          <a href="#people" class="btn btn-ghost">Meet the people</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 TILE BANNER -->
+    <section class="section tiles-section">
+      <div class="container">
+        <div class="tiles">
+          {tiles.map(t => (
+            <a href="#" class={`tile tint-${t.tint}`}>
+              <span class="tile-label">{t.label}</span>
+              <span class="tile-count">{t.count}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENT ADDITIONS -->
+    <section id="people" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Recently added</p>
+          <h2>New to the archive this month</h2>
+        </div>
+        <div class="member-row">
+          {recent.map(p => (
+            <article class="member-card">
+              <div class="avatar"></div>
+              <h3>{p.name}</h3>
+              <p class="dates">{p.dates}</p>
+              <p class="note">{p.note}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Explore</p>
+          <h2>Ways into the archive</h2>
+        </div>
+        <div class="feature-grid">
+          {features.map((f, i) => (
+            <a href="#" class={`feature feature-${i}`}>
+              <div class="feature-art"></div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- PULL QUOTE -->
+    <section class="quote-section">
+      <div class="container">
+        <blockquote>
+          <span class="mark">&ldquo;</span>
+          Family is not an important thing. It's everything.
+          <cite>— Michael J. Fox</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- GALLERY STRIP -->
     <section class="section">
       <div class="container">
-        <h1>{business.companyName}</h1>
-        <p class="lede">{business.tagline}</p>
-        <p>This is a placeholder. The site will grow as research is added.</p>
+        <div class="section-head">
+          <p class="eyebrow">Photographs</p>
+          <h2>Open the galleries</h2>
+        </div>
+        <div class="gallery-strip">
+          {gallery.map((g, i) => (
+            <div class={`gphoto gphoto-${i}`}></div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAMILY TREE PREVIEW -->
+    <section id="tree" class="section section-tree">
+      <div class="container tree-grid">
+        <div class="tree-art">
+          <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g fill="none" stroke="#b5a892" stroke-width="1.5">
+              <line x1="200" y1="40" x2="120" y2="120"/>
+              <line x1="200" y1="40" x2="280" y2="120"/>
+              <line x1="120" y1="120" x2="70" y2="220"/>
+              <line x1="120" y1="120" x2="170" y2="220"/>
+              <line x1="280" y1="120" x2="230" y2="220"/>
+              <line x1="280" y1="120" x2="330" y2="220"/>
+            </g>
+            <g fill="#fafaf8" stroke="#7a6a52" stroke-width="2">
+              <circle cx="200" cy="40" r="22"/>
+              <circle cx="120" cy="120" r="20"/>
+              <circle cx="280" cy="120" r="20"/>
+              <circle cx="70" cy="220" r="18"/>
+              <circle cx="170" cy="220" r="18"/>
+              <circle cx="230" cy="220" r="18"/>
+              <circle cx="330" cy="220" r="18"/>
+            </g>
+          </svg>
+        </div>
+        <div class="tree-copy">
+          <p class="eyebrow">Family tree</p>
+          <h2>Four generations, and counting</h2>
+          <p>The tree currently traces the Byrne line back to early-19th-century Connacht, with branches into Whelan, Maguire and McHale families. Every person card links to source documents — birth certificates, parish records, ship manifests — so anyone can check the working.</p>
+          <a href="#" class="btn btn-primary">Open the full tree</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORIES TEASER -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">From the journal</p>
+          <h2>Stories behind the records</h2>
+        </div>
+        <div class="story-row">
+          {stories.map((s, i) => (
+            <article class={`story story-${i}`}>
+              <div class="story-art"></div>
+              <p class="meta">{s.date} · {s.read}</p>
+              <h3>{s.title}</h3>
+            </article>
+          ))}
+        </div>
+        <div class="centered">
+          <a href="#" class="btn btn-ghost">View all stories</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER PHOTO GRID -->
+    <section class="footer-strip">
+      <div class="footer-grid">
+        {gallery.map((_, i) => <div class={`fphoto fphoto-${i}`}></div>)}
       </div>
     </section>
   </main>
+
   <Footer />
 </Layout>
 
 <style>
-  h1 {
-    font-size: 2.4rem;
-    margin-bottom: 16px;
+  /* Layout overrides — the home page wants more room than the default 880px */
+  :global(:root) {
+    --home-width: 1180px;
   }
 
-  .lede {
+  .container { max-width: var(--home-width); }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    color: #8a7a5e;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section-head { text-align: center; margin-bottom: 40px; }
+  .section-head h2 { font-size: 2.1rem; }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    border: 1.5px solid transparent;
+  }
+  .btn-primary {
+    background: #2a3445;
+    color: #fafaf8;
+    border-color: #2a3445;
+  }
+  .btn-primary:hover { background: #1a2233; color: #fafaf8; }
+  .btn-ghost {
+    background: transparent;
+    color: #2a3445;
+    border-color: #2a3445;
+  }
+  .btn-ghost:hover { background: #2a3445; color: #fafaf8; }
+
+  /* HERO */
+  .hero {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(180,160,130,0.18), transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(120,140,130,0.15), transparent 50%),
+      linear-gradient(180deg, #f5f1e8 0%, #ede7d8 100%);
+    padding: 110px 0 130px;
+    text-align: center;
+  }
+  .hero-inner { max-width: 760px; }
+  .hero h1 {
+    font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+    margin: 8px 0 22px;
+    color: #1f1f1f;
+    font-style: italic;
+  }
+  .hero .lede {
     font-size: 1.15rem;
-    color: var(--text-muted);
+    color: #4a4a4a;
+    margin-bottom: 36px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* TILES */
+  .tiles-section { padding-top: 0; margin-top: -50px; position: relative; z-index: 2; }
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .tile {
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #fafaf8;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 14px 40px -20px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease;
+  }
+  .tile:hover { transform: translateY(-4px); }
+  .tile::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+  }
+  .tile-label, .tile-count { position: relative; z-index: 1; }
+  .tile-label { font-family: Georgia, serif; font-size: 1.6rem; font-weight: 700; }
+  .tile-count { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+  .tint-sepia { background: linear-gradient(135deg, #b5946a 0%, #6a4f33 100%); }
+  .tint-sage  { background: linear-gradient(135deg, #8a9c82 0%, #4a5c50 100%); }
+  .tint-rose  { background: linear-gradient(135deg, #b58e8a 0%, #6a4a4a 100%); }
+
+  /* MEMBER ROW */
+  .member-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .member-card {
+    background: var(--white);
+    padding: 32px 24px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .avatar {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    background: linear-gradient(135deg, #c8b89a, #8a7a5e);
+    box-shadow: inset 0 -8px 16px rgba(0,0,0,0.15);
+  }
+  .member-card h3 { font-size: 1.15rem; margin-bottom: 4px; }
+  .dates { color: #8a7a5e; font-size: 0.9rem; margin-bottom: 12px; letter-spacing: 0.05em; }
+  .note { color: var(--text-muted); font-size: 0.95rem; }
+
+  /* FEATURES */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .feature {
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    display: flex; flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--border);
+  }
+  .feature:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -15px rgba(0,0,0,0.25); }
+  .feature-art {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #d4c4a8, #8a7a5e);
+  }
+  .feature-1 .feature-art { background: linear-gradient(135deg, #a8b8a8, #5a6c5a); }
+  .feature-2 .feature-art { background: linear-gradient(135deg, #c4a890, #7a5a44); }
+  .feature-3 .feature-art { background: linear-gradient(135deg, #b8a4b0, #6a5060); }
+  .feature h3 { font-size: 1.1rem; padding: 20px 20px 6px; }
+  .feature p { padding: 0 20px 22px; color: var(--text-muted); font-size: 0.9rem; }
+
+  /* QUOTE */
+  .quote-section {
+    padding: 100px 0;
+    background: #2a3445;
+    color: #fafaf8;
+    text-align: center;
+  }
+  .quote-section blockquote {
+    font-family: Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.3;
+    font-style: italic;
+    max-width: 880px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .quote-section .mark {
+    font-size: 4rem;
+    color: #b5946a;
+    display: block;
+    line-height: 0.5;
     margin-bottom: 24px;
+  }
+  .quote-section cite {
+    display: block;
+    margin-top: 28px;
+    font-size: 0.95rem;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    color: #b5a892;
+    text-transform: uppercase;
+  }
+
+  /* GALLERY STRIP */
+  .gallery-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+  .gphoto {
+    aspect-ratio: 1;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #c8b89a, #8a7a5e);
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .gphoto:hover { opacity: 0.85; }
+  .gphoto-1 { background: linear-gradient(135deg, #a8b8a8, #5a6c5a); }
+  .gphoto-2 { background: linear-gradient(135deg, #c4a890, #7a5a44); }
+  .gphoto-3 { background: linear-gradient(135deg, #b8a4b0, #6a5060); }
+  .gphoto-4 { background: linear-gradient(135deg, #d4c4a8, #8a7a5e); }
+  .gphoto-5 { background: linear-gradient(135deg, #a89878, #5e4f35); }
+
+  /* TREE */
+  .section-tree { background: #f1efe9; }
+  .tree-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .tree-art {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 40px;
+    border: 1px solid var(--border);
+  }
+  .tree-art svg { width: 100%; height: auto; }
+  .tree-copy h2 { font-size: 2.1rem; margin: 8px 0 18px; }
+  .tree-copy p { color: var(--text-muted); margin-bottom: 28px; font-size: 1.02rem; }
+
+  /* STORIES */
+  .story-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+  .story { background: var(--white); border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+  .story-art {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, #c8b89a, #8a7a5e);
+  }
+  .story-1 .story-art { background: linear-gradient(135deg, #a8b8a8, #5a6c5a); }
+  .story-2 .story-art { background: linear-gradient(135deg, #b8a4b0, #6a5060); }
+  .story .meta {
+    padding: 18px 20px 4px;
+    color: #8a7a5e;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .story h3 { padding: 0 20px 22px; font-size: 1.15rem; line-height: 1.35; }
+  .centered { text-align: center; }
+
+  /* FOOTER PHOTO STRIP */
+  .footer-strip { background: #1a2233; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+  }
+  .fphoto {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #3d4a5c, #1a2233);
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .fphoto-1 { background: linear-gradient(135deg, #4a5c44, #1a2a18); }
+  .fphoto-2 { background: linear-gradient(135deg, #5c4438, #2a1a12); }
+  .fphoto-3 { background: linear-gradient(135deg, #4a4458, #1a182a); }
+  .fphoto-4 { background: linear-gradient(135deg, #58504a, #2a201a); }
+  .fphoto-5 { background: linear-gradient(135deg, #3d4a5c, #1a2233); border-right: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .tree-grid { grid-template-columns: 1fr; }
+    .gallery-strip { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .tiles, .member-row, .story-row { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .hero { padding: 70px 0 90px; }
   }
 </style>
