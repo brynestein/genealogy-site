@@ -1,0 +1,14 @@
+{
+  "gtm": {
+    "enabled": false,
+    "containerId": ""
+  },
+  "ga4": {
+    "enabled": false,
+    "measurementId": ""
+  },
+  "clarity": {
+    "enabled": false,
+    "projectId": ""
+  }
+}

@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import seo from '../data/seo.json';
+---
+
+<Layout title={seo.about.title} description={seo.about.description}>
+  <Header />
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>About</h1>
+        <p>This page will describe the family history project — who it covers, the period and places, and how the research is organised.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+</style>

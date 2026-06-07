@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import business from '../data/business.json';
+import seo from '../data/seo.json';
+---
+
+<Layout title={seo.contact.title} description={seo.contact.description}>
+  <Header />
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Contact</h1>
+        <p>Get in touch about this family history project — corrections, additions or shared lines all welcome.</p>
+        <p><strong>Email:</strong> <a href={`mailto:${business.email}`}>{business.email}</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+</style>

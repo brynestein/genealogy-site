@@ -1,0 +1,176 @@
+---
+import tracking from '../data/tracking.json';
+import business from '../data/business.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  schema?: object | object[];
+}
+
+const siteUrl = 'https://genealogy-site.pages.dev';
+const {
+  title = business.companyName,
+  description = business.tagline,
+  ogImage = "/og-default.jpg",
+  schema,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL(ogImage, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content={business.companyName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {tracking.gtm.enabled && tracking.gtm.containerId && (
+      <script is:inline define:vars={{ gtmId: tracking.gtm.containerId }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      </script>
+    )}
+
+    {tracking.ga4.enabled && !tracking.gtm.enabled && tracking.ga4.measurementId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${tracking.ga4.measurementId}`}></script>
+        <script is:inline define:vars={{ gaId: tracking.ga4.measurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
+
+    {tracking.clarity.enabled && tracking.clarity.projectId && (
+      <script is:inline define:vars={{ clarityId: tracking.clarity.projectId }}>
+        (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window,document,"clarity","script",clarityId);
+      </script>
+    )}
+
+    {schema && (
+      Array.isArray(schema)
+        ? schema.map(s => <script type="application/ld+json" set:html={JSON.stringify(s)} />)
+        : <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    )}
+  </head>
+  <body>
+    {tracking.gtm.enabled && tracking.gtm.containerId && (
+      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${tracking.gtm.containerId}`}
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    )}
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --brand: #3d4a5c;
+    --brand-dark: #2a3445;
+    --text: #1f1f1f;
+    --text-muted: #6b6b6b;
+    --bg: #fafaf8;
+    --bg-alt: #f1efe9;
+    --border: #e5e2dc;
+    --white: #ffffff;
+    --max-width: 880px;
+    --header-height: 72px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text);
+  }
+
+  a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  a:hover {
+    color: var(--brand-dark);
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-alt {
+    background: var(--bg-alt);
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: 40px 0;
+    }
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import business from '../data/business.json';
+import seo from '../data/seo.json';
+---
+
+<Layout title={seo.index.title} description={seo.index.description}>
+  <Header />
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>{business.companyName}</h1>
+        <p class="lede">{business.tagline}</p>
+        <p>This is a placeholder. The site will grow as research is added.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 16px;
+  }
+
+  .lede {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+import business from '../data/business.json';
+
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; {year} {business.companyName}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+</style>

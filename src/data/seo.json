@@ -1,0 +1,14 @@
+{
+  "index": {
+    "title": "Genealogy Site",
+    "description": "A family history project — work in progress."
+  },
+  "about": {
+    "title": "About | Genealogy Site",
+    "description": "About this family history project."
+  },
+  "contact": {
+    "title": "Contact | Genealogy Site",
+    "description": "Get in touch about this family history project."
+  }
+}
