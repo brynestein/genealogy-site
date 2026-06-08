@@ -4,16 +4,30 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import business from '../data/business.json';
 import seo from '../data/seo.json';
+import contact from '../data/contact.json';
 ---
 
 <Layout title={seo.contact.title} description={seo.contact.description}>
   <Header />
   <main>
-    <section class="section">
-      <div class="container">
-        <h1>Contact</h1>
-        <p>Get in touch about this family history project — corrections, additions or shared lines all welcome.</p>
-        <p><strong>Email:</strong> <a href={`mailto:${business.email}`}>{business.email}</a></p>
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">{contact.hero.eyebrow}</p>
+        <h1>{contact.hero.heading}</h1>
+        <p class="lede">{contact.hero.lede}</p>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container narrow">
+        {contact.body.map(para => <p class="bio-para">{para}</p>)}
+
+        {contact.showEmail && (
+          <p class="contact-email">
+            <strong>Email:</strong>{" "}
+            <a href={`mailto:${business.email}`}>{business.email}</a>
+          </p>
+        )}
       </div>
     </section>
   </main>
@@ -21,8 +35,8 @@ import seo from '../data/seo.json';
 </Layout>
 
 <style>
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 16px;
+  .contact-email {
+    margin-top: 28px;
+    font-size: 1.05rem;
   }
 </style>

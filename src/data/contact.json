@@ -1,0 +1,11 @@
+{
+  "hero": {
+    "eyebrow": "Contact",
+    "heading": "Get in touch",
+    "lede": "Corrections, additions or shared lines all welcome. The archive grows on what relatives and researchers send in."
+  },
+  "body": [
+    "Email is the easiest way to reach the project. Please mention which person, place or document you are writing about so we can match it to the right line."
+  ],
+  "showEmail": true
+}

@@ -1,11 +1,6 @@
 ---
 import business from '../data/business.json';
-
-const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-];
+import nav from '../data/nav.json';
 ---
 
 <header class="site-header">
@@ -29,13 +24,11 @@ const nav = [
     display: flex;
     align-items: center;
   }
-
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-
   .brand {
     font-family: Georgia, serif;
     font-size: 1.25rem;
@@ -43,19 +36,14 @@ const nav = [
     color: var(--text);
     text-decoration: none;
   }
-
   nav ul {
     display: flex;
     gap: 24px;
   }
-
   nav a {
     color: var(--text-muted);
     text-decoration: none;
     font-size: 0.95rem;
   }
-
-  nav a:hover {
-    color: var(--brand);
-  }
+  nav a:hover { color: var(--brand); }
 </style>
