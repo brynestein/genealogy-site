@@ -1,0 +1,47 @@
+{
+  "name": "Mary Catherine Byrne",
+  "born": "September 8, 1887",
+  "bornPlace": "Castlebar, County Mayo",
+  "died": "January 23, 1962",
+  "diedPlace": "Liverpool, Merseyside",
+  "age": 74,
+  "quote": "The memories we make with our family is everything.",
+  "bio": [
+    "Mary Catherine Byrne was born in Castlebar, County Mayo, the eldest daughter of Thomas J. Byrne and Bridget McHale. She left Ireland in the autumn of 1909, travelling alone to Liverpool to join her uncle's household in Bootle.",
+    "She married Patrick Whelan in 1912 at St. Alexander's, Bootle. The couple raised six children, four of whom appear elsewhere in this archive. Mary kept letters, photographs and parish documents from both sides of the Irish Sea, and a substantial portion of this site is built directly from materials she preserved."
+  ],
+  "facts": [
+    { "label": "Born",     "value": "September 8, 1887", "sub": "Castlebar, Co. Mayo" },
+    { "label": "Died",     "value": "January 23, 1962", "sub": "Liverpool, age 74" },
+    { "label": "Father",   "value": "Thomas J. Byrne",  "sub": "1854 – 1921" },
+    { "label": "Mother",   "value": "Bridget McHale",   "sub": "1859 – 1934" },
+    { "label": "Spouse",   "value": "Patrick Whelan",   "sub": "m. 1912, Bootle" },
+    { "label": "Children", "value": "6 documented",     "sub": "4 with profiles" }
+  ],
+  "records": [
+    { "kind": "Birth cert.",     "year": "1887", "source": "GRO Ireland · Castlebar district", "href": "#" },
+    { "kind": "Passenger list",  "year": "1909", "source": "SS Anglia · Dublin → Liverpool",    "href": "#" },
+    { "kind": "Marriage record", "year": "1912", "source": "St. Alexander's RC, Bootle",        "href": "#" },
+    { "kind": "Census return",   "year": "1921", "source": "England & Wales · Bootle",          "href": "#" },
+    { "kind": "Death cert.",     "year": "1962", "source": "GRO England · Liverpool South",     "href": "#" }
+  ],
+  "tree": {
+    "ancestors": [
+      { "name": "Thomas J. Byrne", "dates": "1854 – 1921", "tint": "sepia" },
+      { "name": "Bridget McHale",  "dates": "1859 – 1934", "tint": "rose" }
+    ],
+    "self":   { "name": "Mary Catherine Byrne", "dates": "1887 – 1962", "tint": "sage" },
+    "spouse": { "name": "Patrick Whelan",       "dates": "1884 – 1951", "tint": "sepia" },
+    "siblings": [
+      { "name": "John Byrne",    "dates": "1889 – 1948", "tint": "sepia" },
+      { "name": "Annie Byrne",   "dates": "1892 – 1971", "tint": "rose" },
+      { "name": "Michael Byrne", "dates": "1896 – 1917", "tint": "sepia" }
+    ],
+    "children": [
+      { "name": "Eliza Whelan",   "dates": "1913 – 1989", "tint": "rose" },
+      { "name": "Thomas Whelan",  "dates": "1915 – 1982", "tint": "sepia" },
+      { "name": "Bridget Whelan", "dates": "1918 – 2001", "tint": "rose" },
+      { "name": "James Whelan",   "dates": "1921 – 1944", "tint": "sepia" }
+    ]
+  }
+}

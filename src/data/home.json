@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "eyebrow": "A living family archive",
+    "heading": "Family is everything.",
+    "lede": "A continuing project to gather, verify and share the history of the Byrne family — names, places, photographs and the stories behind them.",
+    "primaryCta": { "label": "Explore the family tree", "href": "#tree" },
+    "secondaryCta": { "label": "Meet the people", "href": "#people" }
+  },
+  "sections": {
+    "recent": {
+      "eyebrow": "Recently added",
+      "heading": "New to the archive this month"
+    },
+    "features": {
+      "eyebrow": "Explore",
+      "heading": "Ways into the archive"
+    },
+    "quote": {
+      "text": "Family is not an important thing. It's everything.",
+      "attribution": "— Michael J. Fox"
+    },
+    "gallery": {
+      "eyebrow": "Photographs",
+      "heading": "Open the galleries"
+    },
+    "tree": {
+      "eyebrow": "Family tree",
+      "heading": "Four generations, and counting",
+      "body": "The tree currently traces the Byrne line back to early-19th-century Connacht, with branches into Whelan, Maguire and McHale families. Every person card links to source documents — birth certificates, parish records, ship manifests — so anyone can check the working.",
+      "ctaLabel": "Open the full tree",
+      "ctaHref": "#"
+    },
+    "stories": {
+      "eyebrow": "From the journal",
+      "heading": "Stories behind the records",
+      "viewAllLabel": "View all stories",
+      "viewAllHref": "#"
+    }
+  }
+}
