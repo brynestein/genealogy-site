@@ -12,8 +12,9 @@ yarn-error.log*
 pnpm-debug.log*
 dev.log
 
-# local Claude Code tooling
-.claude/
+# local Claude Code tooling — track the reviewer agent, ignore the rest
+.claude/*
+!.claude/agents/
 
 # environment variables
 .env
