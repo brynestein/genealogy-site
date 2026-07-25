@@ -1,0 +1,205 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import people from '../../data/people.json';
+
+export function getStaticPaths() {
+  return people.map((person) => ({
+    params: { slug: person.slug },
+    props: { person },
+  }));
+}
+
+const { person } = Astro.props;
+
+function findById(id) {
+  if (id === '' || id === null || id === undefined) return null;
+  const numId = Number(id);
+  if (Number.isNaN(numId)) return null;
+  return people.find((p) => p.id === numId) ?? null;
+}
+
+function displayName(p) {
+  if (!p) return '';
+  const surname = p.married_name || p.last_name;
+  return [p.first_name, surname].filter(Boolean).join(' ');
+}
+
+const mother = findById(person.mother);
+const father = findById(person.father);
+const spouse = findById(person.spouse);
+const deathInformant = findById(person.death_informant);
+const children = people.filter(
+  (p) =>
+    (p.mother !== '' && Number(p.mother) === person.id) ||
+    (p.father !== '' && Number(p.father) === person.id)
+);
+
+const name = displayName(person);
+const showMaidenName =
+  person.married_name && person.last_name && person.married_name !== person.last_name;
+
+const lifeStatusRaw = String(person['life-status'] ?? '').trim();
+const isAlive = lifeStatusRaw.toLowerCase() === 'alive';
+
+const genderTint = person.gender === 'F' ? 'rose' : person.gender === 'M' ? 'sepia' : 'sage';
+
+const spouse2Raw = String(person.spouse_2 ?? '').trim();
+const showSpouse2 = spouse2Raw !== '' && spouse2Raw.toLowerCase() !== 'one spouse only';
+
+const deathInformantRaw = String(person.death_informant ?? '').trim();
+
+const outlierLabel =
+  person.outlier === 'Yes' ? 'Extended family' : person.outlier === 'No' ? 'Direct family' : 'Family member';
+
+const facts = [
+  { label: 'Born', value: person.date_of_birth || '—', sub: person.place_of_birth || '' },
+  {
+    label: isAlive ? 'Status' : 'Died',
+    value: isAlive ? 'Living' : lifeStatusRaw || '—',
+    sub: person.place_of_death || '',
+  },
+  { label: 'Occupation', value: person.occupation || '—', sub: '' },
+  { label: 'Baptism', value: person.baptism || '—', sub: '' },
+  { label: 'Burial', value: person.place_of_burial || '—', sub: '' },
+  { label: 'Family', value: outlierLabel, sub: '' },
+];
+
+const hasDetails = person.cause_of_death || deathInformantRaw || person.notes;
+---
+
+<Layout
+  title={`${name} — Genealogy Site`}
+  description={`Profile for ${name}${person.place_of_birth ? `, born ${person.place_of_birth}` : ''}.`}
+>
+  <Header />
+
+  <main>
+    <!-- PROFILE HERO -->
+    <section class="profile-hero">
+      <div class="container profile-inner">
+        <div class="profile-avatar">
+          {person.photo ? (
+            <div class="avatar-ring">
+              <img src={`/images/people/${person.photo}`} alt={name} class="avatar-photo" />
+            </div>
+          ) : (
+            <div class={`avatar-ring tint-${genderTint}`}>
+              <div class="avatar-disc"></div>
+            </div>
+          )}
+          <span class="profile-line">b. {person.date_of_birth || 'unknown'}</span>
+          {isAlive ? (
+            <span class="profile-line">Living</span>
+          ) : lifeStatusRaw ? (
+            <span class="profile-line">d. {lifeStatusRaw}</span>
+          ) : null}
+        </div>
+        <div class="profile-text">
+          <p class="eyebrow">{outlierLabel}</p>
+          <h1>{name}</h1>
+          {showMaidenName && <p class="lifespan">n&eacute;e {person.last_name}</p>}
+          <p class="lifespan">
+            {person.place_of_birth || 'Place unknown'}
+            {person.place_of_death && ` – ${person.place_of_death}`}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK FACTS -->
+    <section class="section facts-section">
+      <div class="container">
+        <div class="facts-grid">
+          {facts.map((f) => (
+            <div class="fact">
+              <p class="fact-label">{f.label}</p>
+              <p class="fact-value">{f.value}</p>
+              {f.sub && <p class="fact-sub">{f.sub}</p>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAMILY -->
+    <section class="section section-alt">
+      <div class="container narrow">
+        <p class="eyebrow centered">Family</p>
+        <h2 class="centered">Relations</h2>
+
+        <div class="family-grid">
+          <div class="family-item">
+            <p class="fact-label">Mother</p>
+            {mother ? (
+              <a href={`/people/${mother.slug}`}>{displayName(mother)}</a>
+            ) : (
+              <p class="fact-sub">Unknown</p>
+            )}
+          </div>
+          <div class="family-item">
+            <p class="fact-label">Father</p>
+            {father ? (
+              <a href={`/people/${father.slug}`}>{displayName(father)}</a>
+            ) : (
+              <p class="fact-sub">Unknown</p>
+            )}
+          </div>
+          <div class="family-item">
+            <p class="fact-label">Spouse</p>
+            {spouse ? (
+              <a href={`/people/${spouse.slug}`}>{displayName(spouse)}</a>
+            ) : (
+              <p class="fact-sub">Unknown</p>
+            )}
+            {person.marriage_date && <p class="fact-sub">m. {person.marriage_date}</p>}
+          </div>
+          {showSpouse2 && (
+            <div class="family-item">
+              <p class="fact-label">Spouse 2</p>
+              <p class="fact-sub">{spouse2Raw}</p>
+            </div>
+          )}
+        </div>
+
+        {children.length > 0 && (
+          <div class="children-block">
+            <p class="fact-label">Children</p>
+            <ul class="children-list">
+              {children.map((c) => (
+                <li><a href={`/people/${c.slug}`}>{displayName(c)}</a></li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- ADDITIONAL DETAILS -->
+    {hasDetails && (
+      <section class="section">
+        <div class="container narrow">
+          <p class="eyebrow">Details</p>
+          <h2>Additional records</h2>
+          {person.cause_of_death && (
+            <p class="bio-para"><strong>Cause of death:</strong> {person.cause_of_death}</p>
+          )}
+          {deathInformantRaw && (
+            <p class="bio-para">
+              <strong>Death informant:</strong>{' '}
+              {deathInformant ? (
+                <a href={`/people/${deathInformant.slug}`}>{displayName(deathInformant)}</a>
+              ) : (
+                deathInformantRaw
+              )}
+            </p>
+          )}
+          {person.notes && <p class="bio-para">{person.notes}</p>}
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+</Layout>

@@ -59,18 +59,21 @@ const footerSlots = Array.from({ length: FOOTER_SLOTS }, (_, i) => gallery[i] ??
           <p class="eyebrow">{home.sections.recent.eyebrow}</p>
           <h2>{home.sections.recent.heading}</h2>
         </div>
-        <div class="member-row">
-          {people.map(p => (
-            <a href={p.slug ? `/people/${p.slug}` : '#'} class="member-card-link">
-              <article class="member-card">
-                <div class="avatar"></div>
-                <h3>{p.name}</h3>
-                <p class="dates">{p.dates}</p>
-                <p class="note">{p.note}</p>
-              </article>
-            </a>
-          ))}
-        </div>
+        <details class="accordion">
+          <summary class="accordion-summary">Show people ({people.length})</summary>
+          <div class="member-row">
+            {people.map(p => (
+              <a href={p.slug ? `/people/${p.slug}` : '#'} class="member-card-link">
+                <article class="member-card">
+                  <div class="avatar"></div>
+                  <h3>{p.name}</h3>
+                  <p class="dates">{p.dates}</p>
+                  <p class="note">{p.note}</p>
+                </article>
+              </a>
+            ))}
+          </div>
+        </details>
       </div>
     </section>
 
